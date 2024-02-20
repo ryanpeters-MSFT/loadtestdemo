@@ -9,7 +9,8 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZ_CREDS }}
-      - run: ls
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Azure Load Testing
         uses: Azure/load-testing@v1.1.21
         with:
