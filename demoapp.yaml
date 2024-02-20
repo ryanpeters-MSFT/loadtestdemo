@@ -1,5 +1,0 @@
-version: v0.1
-testName: DemoApp
-# testPlan: SampleApp.jmx
-description: 'SampleApp Test Run'
-engineInstances: 1
