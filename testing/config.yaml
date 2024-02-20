@@ -1,9 +1,9 @@
 displayName: dockerdemotest
-testPlan: url-test.json
+testPlan: url_test.jmx
 description: ''
 engineInstances: 1
 testId: fa5de6e5-8d8e-4923-823f-170ed20daaa3
-testType: URL
+testType: JMX
 subnetId: /subscriptions/24ef1668-95f3-4c77-adf2-2d023271a3e1/resourceGroups/rg-load-test/providers/Microsoft.Network/virtualNetworks/rg-load-test-vnet/subnets/alt
 publicIPDisabled: false
 splitAllCSVs: False
