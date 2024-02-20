@@ -13,7 +13,7 @@ jobs:
         uses: Azure/load-testing@v1.1.21
         with:
           # Path of the YAML file. Should be fully qualified path or relative to the default working directory
-          loadtestConfigFile: "${{ github.workspace }}/demoapp.yml"
+          loadtestConfigFile: "${{ github.workspace }}/demoapp.yaml"
           # Enter or Select the name of an existing Azure Load Testing resource
           loadtestResource: "binarydad"
           # Custom name for the load test run
