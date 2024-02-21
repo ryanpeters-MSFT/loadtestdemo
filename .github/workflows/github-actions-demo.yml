@@ -2,7 +2,7 @@ name: Load Testing Demo
 run-name: Making a sample pipeline
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Authenticate-And-Run-Test:
     runs-on: ubuntu-latest
     steps:
       - name: Azure Login
