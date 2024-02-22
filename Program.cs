@@ -2,41 +2,52 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
+// our super-secret master key (securely stored and retrieved... RIGHT??)
+const string secretKey = "123456789";
+
+// write to console with timestamp
+var log = (string text) => Console.WriteLine($"{DateTime.Now} - {text}");
+
 // unauthenticated path
 app.MapGet("/", () =>
 {
     const string successMessage = "well hello there anonymous user";
 
-    Console.WriteLine(successMessage);
+    log(successMessage);
 
     return Results.Ok(successMessage);
+});
+
+// retrieves our API key after "securely authenticating"
+app.MapGet("/key", () =>
+{
+    log("key requested");
+    
+    return Results.Ok(secretKey);
 });
 
 // authenticated path
 app.MapGet("/secure", (string apikey) =>
 {
-    // our super-secret master key
-    const string key = "123456789";
-
     const string successMessage = "you passed in the correct key!";
     const string noKeyMessage = "no key provided";
     const string mismatchMessage = "key did not match";
 
     if (string.IsNullOrWhiteSpace(apikey))
     {
-        Console.WriteLine(noKeyMessage);
+        log(noKeyMessage);
 
         return Results.BadRequest(noKeyMessage);
     }
 
-    if (apikey == key)
+    if (apikey == secretKey)
     {
-        Console.WriteLine(successMessage);
+        log(successMessage);
 
         return Results.Ok(successMessage);
     }
 
-    Console.WriteLine(mismatchMessage);
+    log(mismatchMessage);
 
     return Results.BadRequest(mismatchMessage);
 });
