@@ -1,6 +1,6 @@
 name: Load Testing Demo
 run-name: Making a sample pipeline
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
   Authenticate-And-Run-Test:
     runs-on: ubuntu-latest
