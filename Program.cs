@@ -1,27 +1,32 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+app.MapGet("/", () => Results.Ok("looking good!"));
+
+app.MapGet("/secure", (string apikey) =>
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    const string successMessage = "you passed in the correct key!";
+    const string noKeyMessage = "no key provided";
+    const string mismatchMessage = "key did not match";
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+    if (string.IsNullOrWhiteSpace(apikey))
+    {
+        Console.WriteLine(noKeyMessage);
 
-app.UseRouting();
+        return Results.BadRequest(noKeyMessage);
+    }
 
-app.UseAuthorization();
+    if (apikey == "123456789")
+    {
+        Console.WriteLine(successMessage);
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+        return Results.Ok(successMessage);
+    }
+
+    Console.WriteLine(mismatchMessage);
+
+    return Results.BadRequest(mismatchMessage);
+});
 
 app.Run();
